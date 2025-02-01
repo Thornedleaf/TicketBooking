@@ -9,10 +9,18 @@ namespace TicketBookingCore.Tests
 
 
         }
-
+        
         internal TicketBookingResponse Book(TicketBookingRequest request)
         {
-            throw new NotImplementedException();
+            // Returnera en ny TicketBookingResponse
+            return new TicketBookingResponse
+            {
+                FirstName = request.FirstName,
+                Lastname = request.Lastname,
+                Email = request.Email,
+                Date = request.Date
+            };
+
         }
     }
 }
