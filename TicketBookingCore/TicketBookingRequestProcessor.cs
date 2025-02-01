@@ -1,7 +1,7 @@
 ﻿
-namespace TicketBookingCore.Tests
+namespace TicketBookingCore
 {
-    internal class TicketBookingRequestProcessor
+    public class TicketBookingRequestProcessor
     {
         public TicketBookingRequestProcessor()
         {
@@ -10,7 +10,7 @@ namespace TicketBookingCore.Tests
 
         }
         
-        internal TicketBookingResponse Book(TicketBookingRequest request)
+        public TicketBookingResponse Book(TicketBookingRequest request)
         {
             // Returnera en ny TicketBookingResponse
             return new TicketBookingResponse

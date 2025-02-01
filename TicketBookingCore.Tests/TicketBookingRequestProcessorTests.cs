@@ -9,10 +9,10 @@ namespace TicketBookingCore.Tests
 
             var request = new TicketBookingRequest
             {
-                FirstName = "Oskar",
-                Lastname = "Josefsson",
-                Email = "oskar.josefsson@outlook.com",
-                Date ="1983-10-15"
+                FirstName =     "Oskar",
+                Lastname =      "Josefsson",
+                Email =         "oskar.josefsson@outlook.com",
+                Date =          "1:a Februari 2025"
             };
             //Act
             TicketBookingResponse respons = processor.Book(request);
