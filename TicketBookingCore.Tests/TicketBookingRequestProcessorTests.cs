@@ -24,5 +24,19 @@ namespace TicketBookingCore.Tests
             Assert.Equal(request.Email, respons.Email);
             Assert.Equal(request.Date, respons.Date);
         }
+        [Fact]
+        public void ShouldThrowExceptionIfRequestIsNull()
+        {
+            //arrange
+            var processor = new TicketBookingRequestProcessor();
+            
+            //act
+            var exception = Assert.Throws<ArgumentNullException>(() => processor.Book(null));
+            
+            //assert
+            Assert.Equal("request", exception.ParamName);
+        }
+
     }
+    
 }
