@@ -26,5 +26,6 @@ namespace TicketBookingCore
             };
 
         }
+        public TicketBookingRequestProcessor(ITicketBookingRepository ticketBookingRepository) { }
     }
 }

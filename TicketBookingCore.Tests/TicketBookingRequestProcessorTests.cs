@@ -2,6 +2,7 @@ namespace TicketBookingCore.Tests
 {
     public class TicketBookingRequestProcessorTests
     {
+        private readonly Mock<ITicketBookingRepository> _ticketBookibgRepositoryMock;
         private readonly TicketBookingRequestProcessor _processor;
         public TicketBookingRequestProcessorTests()
         {
@@ -56,6 +57,9 @@ namespace TicketBookingCore.Tests
             };
             //act
             TicketBookingResponse response = _processor.Book(request);
+
+            //assert
+
         }
     }
 }
