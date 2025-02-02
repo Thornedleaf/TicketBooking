@@ -45,21 +45,23 @@ namespace TicketBookingCore.Tests
     {
 
         [Fact]
-       
+
         public void ShouldSaveToDatabase()
         {
-        //arrange
-        var request = new TicketBookingRequest
+            [Fact] public void ShouldSaveToDatabase()
             {
-                FirstName = "Oskar",
-                Lastname = "Josefsson",
-                Email = "oskar.josefsson@outlook.com"
-            };
-            //act
-            TicketBookingResponse response = _processor.Book(request);
+                //arrange
+                TicketBookingResponse savedTicketBooking = null;
+                _ticketBookingRepositoryMock.Setup(x => x.Save(It.IsAny<TicketBooking>()))
+                .Callback<TicketBooking>((TicketBooking) =>
+                {
+                    FirstName = "Oskar",
+                        Lastname = "Josefsson",
+                        Email = "oskar.josefsson@outlook.com",
+                        Date = "1:a Februari 2025"
 
-            //assert
-
+                    };
+            }
         }
-    }
+    } 
 }
