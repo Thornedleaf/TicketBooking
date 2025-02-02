@@ -7,17 +7,17 @@ namespace TicketBookingCore.Tests
         {
             _processor = new TicketBookingRequestProcessor();
         }
-    
+
         [Fact]
         public void ShouldReturnTicketsBookingResultWithRequestValues()
-            {
+        {
             //Arrange
             var request = new TicketBookingRequest
             {
-                FirstName =     "Oskar",
-                Lastname =      "Josefsson",
-                Email =         "oskar.josefsson@outlook.com",
-                Date =          "1:a Februari 2025"
+                FirstName = "Oskar",
+                Lastname = "Josefsson",
+                Email = "oskar.josefsson@outlook.com",
+                Date = "1:a Februari 2025"
             };
             //Act
             TicketBookingResponse respons = _processor.Book(request);
@@ -34,11 +34,28 @@ namespace TicketBookingCore.Tests
         {
             //act
             var exception = Assert.Throws<ArgumentNullException>(() => _processor.Book(null));
-            
+
             //assert
             Assert.Equal("request", exception.ParamName);
         }
 
     }
-    
+    public class TicketBookingRepository
+    {
+
+        [Fact]
+       
+        public void ShouldSaveToDatabase()
+        {
+        //arrange
+        var request = new TicketBookingRequest
+            {
+                FirstName = "Oskar",
+                Lastname = "Josefsson",
+                Email = "oskar.josefsson@outlook.com"
+            };
+            //act
+            TicketBookingResponse response = _processor.Book(request);
+        }
+    }
 }
