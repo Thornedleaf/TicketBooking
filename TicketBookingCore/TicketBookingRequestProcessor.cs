@@ -17,16 +17,16 @@ namespace TicketBookingCore
             {
                 throw new ArgumentNullException(nameof(request));
             }
-            _Ticket.Save(TicketBookingSupport.Create<TicketBooking>(request));
-            return TicketBookingSupport.Create<TicketBookingResponse>(request);
-            // Returnera en ny TicketBookingResponse
-            //return new TicketBookingResponse
-            //{
-                //FirstName = request.FirstName,
-                //Lastname =  request.Lastname,    
-                //Email =     request.Email,
-                //Date =      request.Date
-            //};
+            //_ticket.Save(TicketBookingSupport.Create<TicketBooking>(request));
+            //return TicketBookingSupport.Create<TicketBookingResponse>(request);
+             
+            return new TicketBookingResponse
+            {
+                FirstName = request.FirstName,
+                Lastname =  request.Lastname,    
+                Email =     request.Email,
+                Date =      request.Date
+            };
 
         }
         

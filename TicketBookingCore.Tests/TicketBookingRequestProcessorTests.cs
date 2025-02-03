@@ -1,5 +1,7 @@
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Client;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel.DataCollection;
 using Moq;
+using System.ComponentModel.DataAnnotations;
 
 namespace TicketBookingCore.Tests
 {
@@ -54,9 +56,8 @@ namespace TicketBookingCore.Tests
             Assert.Equal("request", exception.ParamName);
         }
 
-    }
-    public class TicketBookingRepository
-    {
+    
+    
 
         [Fact]
 
@@ -71,16 +72,23 @@ namespace TicketBookingCore.Tests
             {
                 savedTicketBooking = TicketBooking;
             });
-            //var request = new TicketBookingRequest
-            //{
-                //FirstName = "Oskar",
-                //Lastname = "Josefsson",
-                //Email = "oskar.josefsson@outlook.com",
-                //Date = "1:a Februari 2025"
+            var request = new TicketBookingRequest
+            {
+            FirstName = "Oskar",
+            Lastname = "Josefsson",
+            Email = "oskar.josefsson@outlook.com",
+            Date = "1:a Februari 2025"
 
-            //};
+            };
             //act
-            _processor.Book(_request);
+            //_processor.Book(_request);
+            TicketBookingResponse response = _processor.Book(_request);
+            //assert
+            Assert.NotNull(savedTicketBooking);
+            Assert.Equal(_request.FirstName, savedTicketBooking.FirstName);
+            Assert.Equal(_request.Lastname, savedTicketBooking.Lastname);
+            Assert.Equal(_request.Email, savedTicketBooking.Email);
+            Assert.Equal(_request.Date, savedTicketBooking.Date);
 
 
 
@@ -92,5 +100,6 @@ namespace TicketBookingCore.Tests
         }
     }
 }
+
 
 
