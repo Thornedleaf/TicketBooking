@@ -7,23 +7,18 @@ namespace TicketBookingCore.Tests
 {
     public class TicketBookingRequestProcessorTests
     {
-        private readonly TicketBookingRequest _request;
+        //private readonly TicketBookingRequest _request;
         private readonly Mock<ITicketBookingRepository> _ticketBookingRepositoryMock;
         private readonly TicketBookingRequestProcessor _processor;
         public TicketBookingRequestProcessorTests()
         {
             //_ticketBookingRepositoryMock = new Mock<ITicketBookingRepository>();
             //_processor = new TicketBookingRequestProcessor(_ticketBookingRepositoryMock.Object);
-            _request = new TicketBookingRequest
-            {
-                FirstName = "Oskar",
-                Lastname = "Josefsson",
-                Email = "oskar.josefsson@outlook.com",
-                Date = "1:a Februari 2025"
-            };
+
             _ticketBookingRepositoryMock = new Mock<ITicketBookingRepository>();
             _processor = new TicketBookingRequestProcessor(_ticketBookingRepositoryMock.Object);
         }
+    
 
         [Fact]
         public void ShouldReturnTicketsBookingResultWithRequestValues()
@@ -67,28 +62,27 @@ namespace TicketBookingCore.Tests
             TicketBooking savedTicketBooking = null;
             
             //setup save
-            _ticketBookingRepositoryMock.Setup(x => x.Save(It.IsAny<TicketBooking>()))
-                .Callback<TicketBooking>((TicketBooking) =>
+            _ticketBookingRepositoryMock.Setup(x => x.Save(It.IsAny<TicketBooking>())).Callback<TicketBooking>((ticketBooking) =>
             {
-                savedTicketBooking = TicketBooking;
+                savedTicketBooking = ticketBooking;
             });
             var request = new TicketBookingRequest
             {
-            FirstName = "Oskar",
-            Lastname = "Josefsson",
-            Email = "oskar.josefsson@outlook.com",
-            Date = "1:a Februari 2025"
+                FirstName =     "Oskar",
+                Lastname =      "Josefsson",
+                Email =         "oskar.josefsson@outlook.com",
+                Date =          "1:a Februari 2025"
 
             };
             //act
             //_processor.Book(_request);
-            TicketBookingResponse response = _processor.Book(_request);
+            TicketBookingResponse response = _processor.Book(request);
             //assert
             Assert.NotNull(savedTicketBooking);
-            Assert.Equal(_request.FirstName, savedTicketBooking.FirstName);
-            Assert.Equal(_request.Lastname, savedTicketBooking.Lastname);
-            Assert.Equal(_request.Email, savedTicketBooking.Email);
-            Assert.Equal(_request.Date, savedTicketBooking.Date);
+            Assert.Equal(request.FirstName, savedTicketBooking.FirstName);
+            Assert.Equal(request.Lastname, savedTicketBooking.Lastname);
+            Assert.Equal(request.Email, savedTicketBooking.Email);
+            Assert.Equal(request.Date, savedTicketBooking.Date);
 
 
 

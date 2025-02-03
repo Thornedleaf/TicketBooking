@@ -5,10 +5,10 @@ namespace TicketBookingCore
 {
     public class TicketBookingRequestProcessor
     {
-        private readonly ITicketBookingRepository _ticket;
+        //private readonly ITicketBookingRepository _ticket;
         public TicketBookingRequestProcessor(ITicketBookingRepository ticketBookingRepository)
         {
-            _ticket = ticketBookingRepository;
+            //_ticket = ticketBookingRepository;
         }
 
         public TicketBookingResponse Book(TicketBookingRequest request)
