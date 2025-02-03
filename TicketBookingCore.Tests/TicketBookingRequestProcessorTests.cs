@@ -1,16 +1,26 @@
+using Microsoft.VisualStudio.TestPlatform.ObjectModel.Client;
 using Moq;
 
 namespace TicketBookingCore.Tests
 {
     public class TicketBookingRequestProcessorTests
     {
-        private readonly Mock<ITicketBookingRepository> _ticketBookibgRepositoryMock;
+        private readonly TicketBookingRequest _request;
+        private readonly Mock<ITicketBookingRepository> _ticketBookingRepositoryMock;
         private readonly TicketBookingRequestProcessor _processor;
         public TicketBookingRequestProcessorTests()
         {
-            _ticketBookibgRepositoryMock = new Mock<ITicketBookingRepository>();
-            _processor = new TicketBookingRequestProcessor(_ticketBookibgRepositoryMock.Object);
-            
+            //_ticketBookingRepositoryMock = new Mock<ITicketBookingRepository>();
+            //_processor = new TicketBookingRequestProcessor(_ticketBookingRepositoryMock.Object);
+            _request = new TicketBookingRequest
+            {
+                FirstName = "Oskar",
+                Lastname = "Josefsson",
+                Email = "oskar.josefsson@outlook.com",
+                Date = "1:a Februari 2025"
+            };
+            _ticketBookingRepositoryMock = new Mock<ITicketBookingRepository>();
+            _processor = new TicketBookingRequestProcessor(_ticketBookingRepositoryMock.Object);
         }
 
         [Fact]
@@ -61,15 +71,16 @@ namespace TicketBookingCore.Tests
             {
                 savedTicketBooking = TicketBooking;
             });
-            var request = new TicketBookingRequest
-            {
-                FirstName = "Oskar",
-                Lastname = "Josefsson",
-                Email = "oskar.josefsson@outlook.com",
-                Date = "1:a Februari 2025"
+            //var request = new TicketBookingRequest
+            //{
+                //FirstName = "Oskar",
+                //Lastname = "Josefsson",
+                //Email = "oskar.josefsson@outlook.com",
+                //Date = "1:a Februari 2025"
 
-            };
-
+            //};
+            //act
+            _processor.Book(_request);
 
 
 

@@ -14,9 +14,6 @@ namespace TicketBookingCore
         public string Date { get; set; }
 
     }
-    public interface ITicketBookingRepository
-    {
-        void Save(TicketBookingRequest ticket);
-    }
+    
 }
 
