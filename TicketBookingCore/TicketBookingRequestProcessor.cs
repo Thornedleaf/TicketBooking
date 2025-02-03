@@ -17,25 +17,31 @@ namespace TicketBookingCore
             {
                 throw new ArgumentNullException(nameof(request));
             }
-            _ticket.Save(new TicketBooking
+            _ticket.Save(Create<TicketBooking>(request));
+            return Create<TicketBookingResponse>(request);
+
+            //_ticket.Save(TicketBookingSupport.Create<TicketBooking>(request));
+            //return TicketBookingSupport.Create<TicketBookingResponse>(request);
+
+            //return new TicketBookingResponse
+            //{
+            //    FirstName = request.FirstName,
+            //    Lastname =  request.Lastname,    
+            //    Email =     request.Email,
+            //    Date =      request.Date
+            //};
+
+
+        }
+        private T Create<T>(TicketBookingRequest request) where T : TicketBookingBase, new()
+        {
+            return new T
             {
                 FirstName = request.FirstName,
                 Lastname = request.Lastname,
                 Email = request.Email,
                 Date = request.Date
-            });
-            //_ticket.Save(TicketBookingSupport.Create<TicketBooking>(request));
-            //return TicketBookingSupport.Create<TicketBookingResponse>(request);
-
-            return new TicketBookingResponse
-            {
-                FirstName = request.FirstName,
-                Lastname =  request.Lastname,    
-                Email =     request.Email,
-                Date =      request.Date
             };
-
         }
-        
     }
 }

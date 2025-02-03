@@ -7,13 +7,19 @@ namespace TicketBookingCore.Tests
 {
     public class TicketBookingRequestProcessorTests
     {
-        //private readonly TicketBookingRequest _request;
+        private readonly TicketBookingRequest _request;
         private readonly Mock<ITicketBookingRepository> _ticketBookingRepositoryMock;
         private readonly TicketBookingRequestProcessor _processor;
         public TicketBookingRequestProcessorTests()
         {
-            //_ticketBookingRepositoryMock = new Mock<ITicketBookingRepository>();
-            //_processor = new TicketBookingRequestProcessor(_ticketBookingRepositoryMock.Object);
+            _request = new TicketBookingRequest
+            {
+                FirstName = "Oskar",
+                Lastname = "Josefsson",
+                Email = "oskar.josefsson@outlook.com",
+                Date = "1:a Februari 2025"
+            };
+            
 
             _ticketBookingRepositoryMock = new Mock<ITicketBookingRepository>();
             _processor = new TicketBookingRequestProcessor(_ticketBookingRepositoryMock.Object);
@@ -24,22 +30,16 @@ namespace TicketBookingCore.Tests
         public void ShouldReturnTicketsBookingResultWithRequestValues()
         {
             //Arrange
-            var request = new TicketBookingRequest
-            {
-                FirstName = "Oskar",
-                Lastname = "Josefsson",
-                Email = "oskar.josefsson@outlook.com",
-                Date = "1:a Februari 2025"
-            };
+            
             //Act
-            TicketBookingResponse respons = _processor.Book(request);
+            TicketBookingResponse respons = _processor.Book(_request);
 
             //Assert
             Assert.NotNull(respons);
-            Assert.Equal(request.FirstName, respons.FirstName);
-            Assert.Equal(request.Lastname, respons.Lastname);
-            Assert.Equal(request.Email, respons.Email);
-            Assert.Equal(request.Date, respons.Date);
+            Assert.Equal(_request.FirstName, respons.FirstName);
+            Assert.Equal(_request.Lastname, respons.Lastname);
+            Assert.Equal(_request.Email, respons.Email);
+            Assert.Equal(_request.Date, respons.Date);
         }
         [Fact]
         public void ShouldThrowExceptionIfRequestIsNull()
@@ -66,23 +66,19 @@ namespace TicketBookingCore.Tests
             {
                 savedTicketBooking = ticketBooking;
             });
-            var request = new TicketBookingRequest
-            {
-                FirstName =     "Oskar",
-                Lastname =      "Josefsson",
-                Email =         "oskar.josefsson@outlook.com",
-                Date =          "1:a Februari 2025"
-
-            };
             //act
-            //_processor.Book(_request);
-            TicketBookingResponse response = _processor.Book(request);
+            _processor.Book(_request);
+
             //assert
+            _ticketBookingRepositoryMock.Verify(x => x.Save(It.IsAny<TicketBooking>()),
+            Times.Once);
+
+
             Assert.NotNull(savedTicketBooking);
-            Assert.Equal(request.FirstName, savedTicketBooking.FirstName);
-            Assert.Equal(request.Lastname, savedTicketBooking.Lastname);
-            Assert.Equal(request.Email, savedTicketBooking.Email);
-            Assert.Equal(request.Date, savedTicketBooking.Date);
+            Assert.Equal(_request.FirstName, savedTicketBooking.FirstName);
+            Assert.Equal(_request.Lastname, savedTicketBooking.Lastname);
+            Assert.Equal(_request.Email, savedTicketBooking.Email);
+            Assert.Equal(_request.Date, savedTicketBooking.Date);
 
 
 
