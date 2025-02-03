@@ -8,8 +8,9 @@ namespace TicketBookingCore.Tests
         private readonly TicketBookingRequestProcessor _processor;
         public TicketBookingRequestProcessorTests()
         {
-            _processor = new TicketBookingRequestProcessor();
             _ticketBookibgRepositoryMock = new Mock<ITicketBookingRepository>();
+            _processor = new TicketBookingRequestProcessor(_ticketBookibgRepositoryMock.Object);
+            
         }
 
         [Fact]
@@ -52,9 +53,11 @@ namespace TicketBookingCore.Tests
         public void ShouldSaveToDatabase()
         {
             //arrange
-            TicketBookingResponse savedTicketBooking = null;
+            TicketBooking savedTicketBooking = null;
+            
+            //setup save
             _ticketBookingRepositoryMock.Setup(x => x.Save(It.IsAny<TicketBooking>()))
-            .Callback<TicketBooking>((TicketBooking) =>
+                .Callback<TicketBooking>((TicketBooking) =>
             {
                 savedTicketBooking = TicketBooking;
             });
@@ -72,10 +75,11 @@ namespace TicketBookingCore.Tests
 
 
 
-             };
+
 
 
         }
-    } 
+    }
 }
+
 
