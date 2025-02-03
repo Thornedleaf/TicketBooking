@@ -8,6 +8,6 @@ namespace TicketBookingCore
 {
     public interface ITicketBookingRepository
     {
-        void Save(TicketBookingRequest ticket);
+        void Save(TicketBooking ticket);
     }
 }

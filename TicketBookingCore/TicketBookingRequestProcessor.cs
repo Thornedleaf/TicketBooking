@@ -1,5 +1,5 @@
 ﻿
-using TicketBookingCore.Tests;
+using TicketBookingCore;
 
 namespace TicketBookingCore
 {
