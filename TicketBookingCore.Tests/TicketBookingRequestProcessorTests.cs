@@ -1,3 +1,5 @@
+using Moq;
+
 namespace TicketBookingCore.Tests
 {
     public class TicketBookingRequestProcessorTests
@@ -7,6 +9,7 @@ namespace TicketBookingCore.Tests
         public TicketBookingRequestProcessorTests()
         {
             _processor = new TicketBookingRequestProcessor();
+            _ticketBookibgRepositoryMock = new Mock<ITicketBookingRepository>();
         }
 
         [Fact]
@@ -48,20 +51,31 @@ namespace TicketBookingCore.Tests
 
         public void ShouldSaveToDatabase()
         {
-            [Fact] public void ShouldSaveToDatabase()
+            //arrange
+            TicketBookingResponse savedTicketBooking = null;
+            _ticketBookingRepositoryMock.Setup(x => x.Save(It.IsAny<TicketBooking>()))
+            .Callback<TicketBooking>((TicketBooking) =>
             {
-                //arrange
-                TicketBookingResponse savedTicketBooking = null;
-                _ticketBookingRepositoryMock.Setup(x => x.Save(It.IsAny<TicketBooking>()))
-                .Callback<TicketBooking>((TicketBooking) =>
-                {
-                    FirstName = "Oskar",
-                        Lastname = "Josefsson",
-                        Email = "oskar.josefsson@outlook.com",
-                        Date = "1:a Februari 2025"
+                savedTicketBooking = TicketBooking;
+            });
+            var request = new TicketBookingRequest
+            {
+                FirstName = "Oskar",
+                Lastname = "Josefsson",
+                Email = "oskar.josefsson@outlook.com",
+                Date = "1:a Februari 2025"
 
-                    };
-            }
+            };
+
+
+
+
+
+
+             };
+
+
         }
     } 
 }
+
